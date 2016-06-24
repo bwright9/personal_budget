@@ -7,4 +7,14 @@ class Api::UsersController < ApplicationController
 			render json: false
 		end
 	end
+
+	def show
+		render json: @user
+	end
+
+	private
+
+	def user
+		@user = User.find_by(id: params[:id])
+	end
 end

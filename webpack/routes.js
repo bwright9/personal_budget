@@ -9,7 +9,7 @@ export default (
   <Route>
     <Route path="/" component={App}>
     	<IndexRoute component={Login} />
-    	<Route path="/dashboard/:user_id" component={Dashboard} />
+    	<Route path="/dashboard/:userId" component={Dashboard} />
     </Route>
 
     <Route path="*" status={404} component={NoMatch}/>

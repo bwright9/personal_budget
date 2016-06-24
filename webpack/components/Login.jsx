@@ -19,7 +19,12 @@ class Login extends React.Component {
 		}).done( user => {
 			if(user) {
 				browserHistory.push(`/dashboard/${user.id}`)
+			} else {
+				alert('Incorrect Email or Password')
+				this.refs
 			}
+		}).fail( data=> {
+			alert('Something went wrong :/')
 		})
 	}
 

@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 	root 'home#index'
 
 	namespace :api do
+		post 'login', to: 'users#login'
 		resources :users do
 			resources :bills, except: [:new, :edit]
 			resources :budgets, except: [:new, :edit]

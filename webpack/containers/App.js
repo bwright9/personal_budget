@@ -1,8 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 const App = ({ children }) => (
   <div>
-    Hello World
+    <Link to="/user" />
     { children }
   </div>
 )

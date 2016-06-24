@@ -1,4 +1,5 @@
 import React from 'react';
+import { browserHistory } from 'react-router';
 
 class Login extends React.Component {
 	constructor(props) {
@@ -15,8 +16,10 @@ class Login extends React.Component {
 			type: 'POST',
 			dataType: 'JSON',
 			data:{ email, password }
-		}).done( success => {
-			debugger
+		}).done( user => {
+			if(user) {
+				browserHistory.push(`/dashboard/${user.id}`)
+			}
 		})
 	}
 

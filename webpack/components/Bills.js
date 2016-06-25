@@ -29,12 +29,9 @@ class Bills extends React.Component {
               <span className="card-title">{bill.name}</span>
             </div>
             <div className="card-action">
-              <Link to={`/bills/${bill.id}`}>Show</link>
             </div>
           </div>
         </div>
-      </div>
-
       ); 
     }); 
   }

@@ -26,6 +26,7 @@ class Budget extends React.Component {
                 <input ref="name" placeholder="name" defaultValue={this.props.budget.name} />
                 <input ref="amount" placeholder="Alloted Amount per Month" defaultValue={this.props.budget.amount} />
                 <button type="submit" className="btn">Update</button>
+                <button type="button" className="btn red" onClick={this.toggleEdit.bind(this)}>Cancel</button>
               </form>
             </div>
           </div>

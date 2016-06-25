@@ -9,7 +9,7 @@ const App = ({ children }) => (
   	     <ul id="nav-mobile" className="right hide-on-med-and-down">
   	       <li><a href="sass.html">Profile</a></li>
   	       <li><a href="badges.html">Bills</a></li>
-  	       <li><a href="collapsible.html">Budgets</a></li>
+  	       <Link to={'/'}>Logout</Link>
   	     </ul>
   	   </div>
   	 </nav>

@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 			resources :bills, except: [:new, :edit]
 			resources :budgets, except: [:new, :edit]
 			resources :misc_incomes, except: [:new, :edit]
+			resources :expenditures, except: [:new, :edit]
 		end
 	end
 

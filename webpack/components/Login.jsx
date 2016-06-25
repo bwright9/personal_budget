@@ -15,7 +15,19 @@ class Login extends React.Component {
 			type: 'POST',
 			dataType: 'JSON',
 			data:{ email, password }
+<<<<<<< HEAD
 		}).done( success => {
+=======
+		}).done( user => {
+			if(user) {
+				browserHistory.push(`/dashboard/${user.id}`)
+			} else {
+				alert('Incorrect Email or Password')
+				this.refs
+			}
+		}).fail( data=> {
+			alert('Something went wrong :/')
+>>>>>>> 585e564f666676ffb5db6ccd7ef3acdd2ee9acbf
 		})
 	}
 

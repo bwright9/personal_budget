@@ -22,6 +22,7 @@ const DashBudgets = ({ budgets, expenditures }) => {
 
 	return(
 		<div>
+			<h4>Budgets</h4>
 			{budgetArr}
 		</div>
 	)

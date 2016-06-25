@@ -11,7 +11,7 @@ class Bills extends React.Component {
 
   componentWillMount() {
     $.ajax({
-      url: `/api/users/${this.props.userId}/bills`, 
+      url: `/api/users/${this.props.params.userId}/bills`, 
       type: 'GET', 
       dataType: 'JSON', 
     }).done ( bills => {
@@ -28,12 +28,11 @@ class Bills extends React.Component {
       url: `/api/users/${this.props.params.userId}/bills`, 
       type: 'POST', 
       dataType: 'JSON', 
-      data: ( bill: { name, amount } }
+      data: { bill: { name, amount } }
     }).done(bill => {
-      this.setState({ bills: [ {...bill}, ...this.state.bills])
-      })
+      this.setState({ bills: [ {...bill}, ...this.state.bills] })
     })
-  })
+  }
 
   deleteBill(id) {
     $.ajax({
@@ -54,10 +53,11 @@ class Bills extends React.Component {
   displayBills() {
     return this.state.bills.map ( bill => {
       return (
-        <div className="col s12 m6">
+        <div key={`bill-${bill.id}`} className="col s12 m6">
           <div className="card blue-grey darken-1">
             <div className="card-content white-text">
               <span className="card-title">{bill.name}</span>
+              <p>Amount: {bill.amount}</p>
             </div>
             <div className="card-action">
             </div>

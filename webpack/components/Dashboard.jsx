@@ -1,5 +1,6 @@
 import React from 'react';
 import DashBudgets from './DashBudgets';
+import DashBills from './DashBills';
 
 class Dashboard extends React.Component {
 	constructor(props) {
@@ -68,7 +69,7 @@ class Dashboard extends React.Component {
 		return(
 			this.state.expenditures.map( expenditure => {
 				return(
-					<div>
+					<div key={`expenditure-${expenditure.id}`}>
 						<p>{expenditure.name}: ${expenditure.amount}</p>
 					</div>
 				)
@@ -91,6 +92,7 @@ class Dashboard extends React.Component {
 				<div className="col s6 m9">
 					<h2 className="center">Your Dashboard</h2>
 					<DashBudgets budgets={this.state.budgets} expenditures={this.state.expenditures}/>
+					<DashBills userId={this.state.user.id}/>
 				</div>
 				<div className="col s6 m3">
 					<h6>Add New Expenditure</h6>

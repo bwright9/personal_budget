@@ -3,11 +3,31 @@ import React from 'react';
 class Dashboard extends React.Component {
 	constructor(props) {
 		super(props);
+		this.state = { dashboard: [] };
 	}
+
+	componentWillMount() {
+		$.ajax({
+			url: `/api/users/${this.props.params.userId}`, 
+			type: 'GET', 
+			dataType: 'JSON'
+		}).done( dashboard => {
+			this.setState({ dashboard }); 
+		}).fail( data => {
+			console.log(data); 
+		}); 
+	}
+
+	displayDashboard() {
+	
+	}
+
 
 	render() {
 		return(
-			<h1>This is the Dashboard</h1>
+			<div className='row'>
+				{this.displayDashboard.bind(this)()}
+			</div>
 		)
 	}
 }

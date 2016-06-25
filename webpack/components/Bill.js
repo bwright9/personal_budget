@@ -17,21 +17,30 @@ class Bill extends React.Component {
         });
     }
 
-      render() {
-        return (
-          <div key={this.props.bill.id} className="col s12 m6">
-            <div className="card grey lighten-3">
-              <div className="card-content">
-                <span className="card-title">{this.props.bill.name}</span>
-              </div>
-              <div className="card-action">
-                <button className="btn red">Delete Bill</button>
-              </div>
+    render() {
+      return (
+        <div key={this.props.bill.id} className="col s12 m6">
+          <div className="card grey lighten-3">
+            <div className="card-content">
+              <span className="card-title">{this.props.bill.name}</span>
+            </div>
+            <div className="card-action">
+              <button className="btn red">Delete Bill</button>
             </div>
           </div>
-        )
-      }
-    }
-
+        </div>
+        
+        <div>
+          <form>
+            <input ref='name' type='text' placeholder='Name' defaultValue={this.state.bill.name} /> 
+            <input ref='amount' type='text' placeholder='Amount' defaultValue={this.state.bill.amount} /> 
+            <input ref='due_date' type='text' placeholder='Due Date' defaultValue={this.state.bill.due_date} /> 
+            <input type='submit' value='Update Bill' className='btn' />
+            <button type='button' className='btn grey'>Back</button>
+            <button className='btn'>Edit</button>
+           </form>
+         </div>
+      )
+    } 
 
     export default Bill; 

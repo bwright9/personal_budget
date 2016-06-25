@@ -35,6 +35,21 @@ class Bills extends React.Component {
     })
   })
 
+  deleteBill(id) {
+    $.ajax({
+    }).done( data => {
+      let bills = this.state.bills; 
+      let index = bills.findIndex( b => b.id === id); 
+      this.setState({
+        bills: [
+          ...bills.slice(0, index), 
+          ...bills.slice(index + 1, bills.length)
+        ]
+      }); 
+    }).fail( data => {
+      console.log(data); 
+    }); 
+  }
 
   displayBills() {
     return this.state.bills.map ( bill => {

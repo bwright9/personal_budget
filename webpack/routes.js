@@ -11,6 +11,7 @@ export default (
     <Route path="/" component={App}>
     	<IndexRoute component={Login} />
     	<Route path="/dashboard/:userId" component={Dashboard} />
+
     	<Route path="/budgets/:userId" component={BudgetPage} />
     </Route>
 

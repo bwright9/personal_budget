@@ -15,6 +15,7 @@ class Login extends React.Component {
 			type: 'POST',
 			dataType: 'JSON',
 			data:{ email, password }
+		}).done( success => {
 		}).done( user => {
 			if(user) {
 				browserHistory.push(`/dashboard/${user.id}`)

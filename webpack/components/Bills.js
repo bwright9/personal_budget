@@ -1,9 +1,11 @@
 import React from 'react'; 
+import Bill from './Bill'
 
 class Bills extends React.Component {
   constructor(props) {
     super(props); 
-    this.state = { bills: [] };   
+    this.state = { bills: [] }; 
+    this.displayBills = this.displayBills.bind(this);   
 
   }
 
@@ -19,6 +21,35 @@ class Bills extends React.Component {
     }); 
   }
 
+  addBill() {
+    let name = this.refs.name.value
+    let amount = this.refs.amount.value
+    $.ajax({
+      url: `/api/users/${this.props.params.userId}/bills`, 
+      type: 'POST', 
+      dataType: 'JSON', 
+      data: ( bill: { name, amount } }
+    }).done(bill => {
+      this.setState({ bills: [ {...bill}, ...this.state.bills])
+      })
+    })
+  })
+
+  deleteBill(id) {
+    $.ajax({
+    }).done( data => {
+      let bills = this.state.bills; 
+      let index = bills.findIndex( b => b.id === id); 
+      this.setState({
+        bills: [
+          ...bills.slice(0, index), 
+          ...bills.slice(index + 1, bills.length)
+        ]
+      }); 
+    }).fail( data => {
+      console.log(data); 
+    }); 
+  }
 
   displayBills() {
     return this.state.bills.map ( bill => {

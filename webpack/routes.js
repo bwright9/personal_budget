@@ -11,10 +11,7 @@ export default (
     <Route path="/" component={App}>
     	<IndexRoute component={Login} />
     	<Route path="/dashboard/:userId" component={Dashboard} />
-<<<<<<< HEAD
-=======
     	<Route path="/budgets/:userId" component={BudgetPage} />
->>>>>>> 585e564f666676ffb5db6ccd7ef3acdd2ee9acbf
     </Route>
 
     <Route path="*" status={404} component={NoMatch}/>

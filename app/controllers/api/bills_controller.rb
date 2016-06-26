@@ -8,7 +8,8 @@ class Api::BillsController < ApplicationController
 
 
 	def destroy
-		 
+		@bill.destroy
+		render json: true
 	end 
 
 	def update

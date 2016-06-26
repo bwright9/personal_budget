@@ -87,6 +87,7 @@ class Bill extends React.Component {
           )
         }
       }
+  }
 }
 
 export default Bill; 

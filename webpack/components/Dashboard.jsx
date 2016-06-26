@@ -5,12 +5,14 @@ import DashBills from './DashBills';
 class Dashboard extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { dashboard: [], user: null, budgets: [], expenditures: [] };
+		this.state = { dashboard: [], user: null, budgets: [], bills: [], expenditures: [] };
 		this.displayDashboard = this.displayDashboard.bind(this);
 		this.createOptions = this.createOptions.bind(this);
 		this.displayExpenditures = this.displayExpenditures.bind(this);
 		this.showIncome = this.showIncome.bind(this);
 		this.updateIncome = this.updateIncome.bind(this);
+		this.totalExpenditures = this.totalExpenditures.bind(this);
+		this.totalBills = this.totalBills.bind(this)
 	}
 
 	componentWillMount() {
@@ -23,6 +25,13 @@ class Dashboard extends React.Component {
 		}).fail( data => {
 			alert('Something went wrong'); 
 		});
+		$.ajax({
+			url: `/api/users/${this.props.params.userId}/bills`,
+			type: 'GET',
+			dataType: 'JSON'
+		}).done( bills => {
+			this.setState({ bills })
+		})
 		$.ajax({
 			url: `/api/users/${this.props.params.userId}/budgets`,
 			type: 'GET',
@@ -44,8 +53,19 @@ class Dashboard extends React.Component {
 	}
 
 	showIncome() {
+		let income = this.state.user.income;
+		let expenditures = this.totalExpenditures();
+		let bills = this.totalBills();
+		let remaining = income - expenditures - bills
 		if(this.state.user.income) {
-
+			return(
+				<div className="center blue lighten-3 container" style={{borderRadius: '20px', paddingBottom: '10px', marginTop: '40px', marginBottom: '30px'}}>
+					<h3>Your Monthly Income: ${income}</h3>
+					<h5>Total Expenditures: ${expenditures}</h5>
+					<h5>Total Bills: ${bills}</h5>
+					<h5>Remaining Disposable Income: ${remaining}</h5>
+				</div>
+			)
 		} else {
 			return(
 				<div>
@@ -60,10 +80,17 @@ class Dashboard extends React.Component {
 		}
 	}
 
+	totalBills() {
+		let total = 0;
+		for(let bill of this.state.bills){
+			total += parseFloat(bill.amount)
+		}
+		return total	
+	}
+
 	updateIncome(e) {
 		e.preventDefault();
 		let income = this.refs.income.value
-		debugger
 		this.refs.incomeForm.reset()
 		$.ajax({
 			url: `/api/users/${this.state.user.id}`,
@@ -99,6 +126,14 @@ class Dashboard extends React.Component {
 			console.log(data)
 			alert('failed to create expenditure')
 		})
+	}
+
+	totalExpenditures() {
+		let total = 0;
+		for(let expenditure of this.state.expenditures){
+			total += parseFloat(expenditure.amount)
+		}
+		return total
 	}
 
 	displayExpenditures() {

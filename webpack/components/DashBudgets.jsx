@@ -14,7 +14,7 @@ const DashBudgets = ({ budgets, expenditures, userId }) => {
 	let budgetArr = budgets.map( budget => {
 		let amountSpent = categories[budget.name] ? categories[budget.name] : 0
 		return(
-			<div>
+			<div key={`budget-${budget.id}`}>
 				<h5>{budget.name}</h5>
 				<p>Amount: {budget.amount} | Amount Spent: {amountSpent} | Amount Remaining: {budget.amount - amountSpent}</p>
 			</div>
@@ -23,7 +23,7 @@ const DashBudgets = ({ budgets, expenditures, userId }) => {
 
 	return(
 		<div>
-			<h4><Link to={`/budgets/${userId}`}>Budgets</Link></h4>
+			<h4><Link to={`/budgets/${userId}`}>Monthly Budgets</Link></h4>
 			{budgetArr}
 		</div>
 	)

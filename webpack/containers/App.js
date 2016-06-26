@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 const App = ({ children }) => (
   <div>
   	<nav>
-  	   <div className="nav-wrapper">
+  	   <div className="nav-wrapper blue accent-1" style={{paddingLeft: "20px"}}>
   	     <a href="#" className="brand-logo">Personal Budget</a>
   	     <ul id="nav-mobile" className="right hide-on-med-and-down">
   	       <li><a href="sass.html">Profile</a></li>

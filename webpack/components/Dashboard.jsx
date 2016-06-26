@@ -9,7 +9,8 @@ class Dashboard extends React.Component {
 		this.displayDashboard = this.displayDashboard.bind(this);
 		this.createOptions = this.createOptions.bind(this);
 		this.displayExpenditures = this.displayExpenditures.bind(this);
-		this.showIncome = this.showIncome.bind(this)
+		this.showIncome = this.showIncome.bind(this);
+		this.updateIncome = this.updateIncome.bind(this);
 	}
 
 	componentWillMount() {
@@ -49,9 +50,31 @@ class Dashboard extends React.Component {
 			return(
 				<div>
 					<h3 className="center">Please update your income</h3>
+					<div className="col s6 m4 offset-s3 offset-m4">
+						<form ref='incomeForm' onSubmit={this.updateIncome}>
+							<input ref='income' type='number' placeholder="Monthly Income" />
+						</form>
+					</div>
 				</div>
 			)
 		}
+	}
+
+	updateIncome(e) {
+		e.preventDefault();
+		let income = this.refs.income.value
+		debugger
+		this.refs.incomeForm.reset()
+		$.ajax({
+			url: `/api/users/${this.state.user.id}`,
+			type: 'PUT',
+			dataType: 'JSON',
+			data: { user: { income } }
+		}).done( user => {
+			this.setState({ user })
+		}).fail( data => {
+			alert('Could not update income')
+		})
 	}
 
 	addExpenditure(e) {
@@ -113,7 +136,7 @@ class Dashboard extends React.Component {
 						<DashBills userId={this.state.user.id}/>
 					</div>
 				</div>
-				<div className="col s6 m3">
+				<div className="col s6 m3" style={{borderLeft: 'solid 1px grey'}}>
 					<h6>Add New Expenditure</h6>
 					<form ref='addExpenditure' onSubmit={this.addExpenditure.bind(this)} >
 						<input ref='expenditureName' placeholder='Name' />

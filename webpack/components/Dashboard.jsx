@@ -9,6 +9,7 @@ class Dashboard extends React.Component {
 		this.displayDashboard = this.displayDashboard.bind(this);
 		this.createOptions = this.createOptions.bind(this);
 		this.displayExpenditures = this.displayExpenditures.bind(this);
+		this.showIncome = this.showIncome.bind(this)
 	}
 
 	componentWillMount() {
@@ -39,6 +40,18 @@ class Dashboard extends React.Component {
 		}).fail( data=> {
 			alert('something went wrong with the expenditures');
 		})
+	}
+
+	showIncome() {
+		if(this.state.user.income) {
+
+		} else {
+			return(
+				<div>
+					<h3 className="center">Please update your income</h3>
+				</div>
+			)
+		}
 	}
 
 	addExpenditure(e) {
@@ -89,10 +102,16 @@ class Dashboard extends React.Component {
 	displayDashboard() {
 		return(
 			<div>
+				<div className="row">
+					{this.showIncome()}
+				</div>
 				<div className="col s6 m9">
-					<h2 className="center">Your Dashboard</h2>
-					<DashBudgets budgets={this.state.budgets} expenditures={this.state.expenditures} userId={this.state.user.id}/>
-					<DashBills userId={this.state.user.id}/>
+					<h2 className="center" style={{marginTop: '0'}}>Your Dashboard</h2>
+					<div className="container" style={{ border: 'solid 1px grey', borderRadius: '10px', padding: "5px"}}>
+						<DashBudgets budgets={this.state.budgets} expenditures={this.state.expenditures} userId={this.state.user.id}/>
+						<hr />
+						<DashBills userId={this.state.user.id}/>
+					</div>
 				</div>
 				<div className="col s6 m3">
 					<h6>Add New Expenditure</h6>

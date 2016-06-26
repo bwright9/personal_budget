@@ -16,7 +16,7 @@ class Api::BillsController < ApplicationController
 	end
 
 	def create 
-		bill = @user.bills.new(budget_params)
+		bill = @user.bills.new(bill_params)
 		if bill.save
 			render json: bill  
 		else

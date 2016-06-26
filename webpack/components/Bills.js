@@ -68,11 +68,19 @@ class Bills extends React.Component {
   }
 
   render() {
-    return(
-      <div className='row'>
-        {this.displayBills.bind(this)()}
-      </div>
-    )
+    if(this.state.bills.length > 0){
+      return(
+        <div className='row'>
+          <form ref="newBillForm">
+            <input ref="name" placeholder="Name" />
+            <input ref="amount" type="number" step="any" placeholder="Amount" />
+          </form>
+          {this.displayBills.bind(this)()}
+        </div>
+      )
+    } else {
+      return(<h1 className="center">Loading...</h1>)
+    }
   }
 }
 

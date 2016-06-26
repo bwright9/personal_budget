@@ -91,7 +91,7 @@ class Dashboard extends React.Component {
 			<div>
 				<div className="col s6 m9">
 					<h2 className="center">Your Dashboard</h2>
-					<DashBudgets budgets={this.state.budgets} expenditures={this.state.expenditures}/>
+					<DashBudgets budgets={this.state.budgets} expenditures={this.state.expenditures} userId={this.state.user.id}/>
 					<DashBills userId={this.state.user.id}/>
 				</div>
 				<div className="col s6 m3">

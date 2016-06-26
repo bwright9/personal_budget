@@ -41,8 +41,8 @@ class Budget extends React.Component {
               <p>Spending allowed per month: {this.props.budget.amount}</p>
             </div>
             <div className="card-action">
-              <button className="btn red" onClick={() => this.props.deleteBudget(this.props.budget.id)}>Delete Budget</button>
-              <button className="btn grey" onClick={this.toggleEdit.bind(this)}>Edit</button>
+              <button className="btn red" onClick={() => this.props.deleteBudget(this.props.budget.id)}>Delete</button>
+              <button className="btn blue-grey" onClick={this.toggleEdit.bind(this)}>Edit</button>
             </div>
           </div>
         </div>

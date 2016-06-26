@@ -58,6 +58,7 @@ class Bill extends React.Component {
                 <button type='button' onClick={this. Edit} className='btn grey'>Back</button> 
               </form>
             </div> 
+            )
         } else {
         if(this.state.bill) {
             return(

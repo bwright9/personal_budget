@@ -6,6 +6,7 @@ import Dashboard from './components/Dashboard';
 import Login from './components/Login';
 import BudgetPage from './components/BudgetPage';
 import Bills from './components/Bills';
+import SignUp from './components/SignUp';
 
 export default (
   <Route>
@@ -14,6 +15,7 @@ export default (
     	<Route path="/dashboard/:userId" component={Dashboard} />
     	<Route path="/bills/:userId" component={Bills} />
     	<Route path="/budgets/:userId" component={BudgetPage} />
+    	<Route path="/signup" component={SignUp} />
     </Route>
 
     <Route path="*" status={404} component={NoMatch}/>

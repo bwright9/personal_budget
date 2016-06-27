@@ -185,7 +185,9 @@ class Dashboard extends React.Component {
 					</form>
 					<h4>Expenditures</h4>
 					<hr />
-					{this.displayExpenditures()}
+					<div style={{maxHeight: '80vh', overflow: 'scroll', borderBottom: 'solid 1px grey'}}>
+						{this.displayExpenditures()}
+					</div>
 				</div>
 			</div>
 		)

@@ -14,11 +14,20 @@ class Api::UsersController < ApplicationController
 		render json: @user
 	end
 
+	def create
+		user = User.create(user_params)
+		if user.save
+			render json: user
+		else
+			render json: { errors: user.errors.full_message}
+		end
+	end
+
 	def update
 		if @user.update(user_params)
 			render json: @user
 		else
-			render json: false
+			render json: { errors: @user.errors.full_message}
 		end
 	end
 

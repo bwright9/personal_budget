@@ -1,5 +1,6 @@
 import React from 'react';
-import { browserHistory } from 'react-router'
+import { Link } from 'react-router';
+import { browserHistory } from 'react-router';
 
 class Login extends React.Component {
 	constructor(props) {
@@ -22,7 +23,7 @@ class Login extends React.Component {
 				browserHistory.push(`/dashboard/${user.id}`)
 			} else {
 				alert('Incorrect Email or Password')
-				this.refs
+				this.refs.email.value = ''
 			}
 		}).fail( data=> {
 			alert('Something went wrong :/')
@@ -38,6 +39,7 @@ class Login extends React.Component {
 					<input ref='password' type='password' placeholder='password' />
 					<button type='submit' className='btn'>Log In</button>
 				</form>
+				<Link to={'/signup'}>Sign Up</Link >
 			</div>
 		)
 	}

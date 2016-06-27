@@ -12,8 +12,17 @@ class Budget extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    debugger
+    let name = this.refs.name.value
+    let amount = this.refs.amount.value
     this.toggleEdit();
+    $.ajax({
+      url: `/api/users/${this.props.userId}/budgets/${this.props.budget.id}`,
+      type: 'PUT',
+      dataType: 'JSON',
+      data: { budget: { name, amount } }
+    }).done( budget => {
+      this.props.updateBudget(budget)
+    })
   }
 
   render() {

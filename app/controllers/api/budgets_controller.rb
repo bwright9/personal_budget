@@ -16,6 +16,11 @@ class Api::BudgetsController < ApplicationController
 	end
 
 	def update
+		if @budget.update(budget_params)
+			render json: @budget
+		else
+			render json: { errors: @budget.errors.full_messages}
+		end
 	end
 
 	def destroy

@@ -39,6 +39,18 @@ class BudgetPage extends React.Component {
 		this.refs.addBudgetForm.reset()
 	}
 
+	updateBudget(budget) {
+		let budgets = this.state.budgets
+		let index = budgets.findIndex( b => b.id === budget.id)
+		this.setState({
+			budgets: [
+				...budgets.slice(0, index),
+				{...budget},
+				...budgets.slice(index + 1, budgets.length)
+			]
+		})
+	}
+
 	deleteBudget(id) {
 		$.ajax({
 			url: `/api/users/${this.props.params.userId}/budgets/${id}`,
@@ -59,7 +71,7 @@ class BudgetPage extends React.Component {
 	displayBudgets() {
 		return this.state.budgets.map( budget => {
 			return (
-				<Budget key={budget.id} budget={budget} deleteBudget={this.deleteBudget.bind(this)}/>
+				<Budget key={budget.id} budget={budget} userId={this.props.params.userId} deleteBudget={this.deleteBudget.bind(this)} updateBudget={this.updateBudget.bind(this)}/>
 			)
 		})
 	}

@@ -1,92 +1,55 @@
 import React from 'react';
-import { Link } from 'react-router'; 
 
 class Bill extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = { bill: null, editView: false }
-        this.Edit = this.Edit.bind(this); 
-    }
+  constructor(props) {
+    super(props);
+    this.state = { edit: false }
+  }
 
-    componentWillMount() {
-        $.ajax({
-            url: `/api/bills/${this.props.params.id}`,
-            type: 'GET',
-            dataType: 'JSON'
-        }).done( bill => {
-            this.setState({ bill });
-        }).fail( data => {
-            console.log(data);
-        });
-    }
+  toggleEdit() {
+    this.setState({ edit: !this.state.edit })
+  }
 
-    Edit() {
-      this.setState({ editView: !this.state.editView }); 
+  handleSubmit(e) {
+    e.preventDefault();
+    this.toggleEdit();
+  }
 
-    }
-
-    editControl(e) {
-      e.preventDefault(); 
-      let name = this.refs.name.value;
-      let amount = this.refs.amount.value;
-      let due_date = this.refs.due_date.value;
-
-      $.ajax({
-        url: `/api/bills/${this.state.bill.id}`, 
-        type: 'PUT',
-        data: { bill: { name, amount, due_date } }, 
-        dataType: 'JSON'
-      }).done( bill => {
-        this.setState({ bill, editView: false }); 
-      }).fail( data => {
-        console.log(data); 
-      }); 
-
-    }
-
-    render() {
-        if(this.state.editView) {
-          return(
-            <div>
-              <h3>Edit Bill: {this.state.bill.name}</h3>
-              <form onSubmit={this.editControl.bind(this)}>
-                <input ref='name' ty
-                pe='text' placeholder='Name' defaultValue={this.state.bill.name} /> 
-                <input ref='amount' type='text' placeholder='Amount' defaultValue={this.state.bill.amount} /> 
-                <input ref='due_date' type='text' placeholder='Due Date' defaultValue={this.state.bill.due_date} /> 
-                <input type='submit' value='Update Bill' className='btn' />
-                <button type='button' onClick={this. Edit} className='btn grey'>Back</button> 
+  render() {
+    if(this.state.edit){
+      return (
+        <div key={this.props.bill.id} className="col s12 m6">
+          <div className="card grey lighten-3">
+            <div className="card-content">
+              <form onSubmit={this.handleSubmit.bind(this)}>
+                <input ref="name" placeholder="name" defaultValue={this.props.bill.name} />
+                <input ref="amount" placeholder="Amount" defaultValue={this.props.bill.amount} />
+                <input ref="due_date" placeholder="Due Date" defaultValue={this.props.bill.due_date} />
+                <button type="submit" className="btn">Update</button>
+                <button type="button" className="btn red" onClick={this.toggleEdit.bind(this)}>Cancel</button>
               </form>
-            </div> 
-            )
-        } else {
-        if(this.state.bill) {
-            return(
-        <div className="col s12">
-          <div className="card blue-grey darken-1">
-            <div className="card-content white-text">
-              <span className="card-title">{this.state.bill.name}</span>
-              <div>
-                  <label>Amount:</label>
-                  <p>{this.state.bill.amount}</p>
-
-                  <label>Due date:</label>
-                  <p>{this.state.bill.due_date}</p>
-                </div>
-            </div>
-            <div className="card-action">
-             <Link to='/'>All Bills</Link> 
-             <button className='btn' onClick={this.Edit}>Edit</button>
             </div>
           </div>
         </div>
-            )
-      } else {
-          return(
-              <h3 className='center'>Bill failed to update...</h3>
-          )
-        }
-      }
+      )
+    } else {
+      return (
+        <div key={this.props.bill.id} className="col s12 m6">
+          <div className="card grey lighten-3">
+            <div className="card-content">
+              <span className="card-title">{this.props.bill.name}</span>
+              <p>Amount: {this.props.bill.amount}</p>
+              <p>Due date: {this.props.bill.due_date}</p>
+            </div>
+            <div className="card-action">
+              <button className="btn red" onClick={() => this.props.deleteBill(this.props.bill.id)}>Delete</button>
+              <button className="btn blue-grey" onClick={this.toggleEdit.bind(this)}>Edit</button>
+            </div>
+          </div>
+        </div>
+      )
+    }
+  }
 }
 
-export default Bill; 
+export default Bill

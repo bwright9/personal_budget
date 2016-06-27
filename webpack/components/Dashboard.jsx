@@ -193,7 +193,7 @@ class Dashboard extends React.Component {
 
 
 	render() {
-		if(this.state.budgets.length > 0) {
+		if(this.state.user) {
 			return(
 				<div className='row'>
 					{this.displayDashboard()}

@@ -49,6 +49,13 @@ class Bill extends React.Component {
         </div>
       )
     }
+            )
+      } else {
+          return(
+              <h3 className='center'>Bill failed to update...</h3>
+          )
+        }
+      }
   }
 }
 

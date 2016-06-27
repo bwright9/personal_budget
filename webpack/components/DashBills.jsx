@@ -34,7 +34,7 @@ class DashBills extends React.Component {
 	}
 
 	render() {
-		if(this.state.bills.length > 0) {
+		if(this.state.bills) {
 			return(
 				<div>
 					<h4><Link to={`/bills/${this.props.userId}`}>Monthly Bills</Link></h4>

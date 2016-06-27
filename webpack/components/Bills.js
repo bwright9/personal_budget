@@ -1,4 +1,4 @@
- import React from 'react';
+import React from 'react';
  import Bill from './Bill';
 
  class Bills extends React.Component {
@@ -88,4 +88,4 @@
   }
  }
 
- export default Bills 
+ export default Bills

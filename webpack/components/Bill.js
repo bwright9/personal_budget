@@ -1,4 +1,4 @@
-import React from 'react';
+ import React from 'react';
 
 class Bill extends React.Component {
   constructor(props) {
@@ -49,13 +49,6 @@ class Bill extends React.Component {
         </div>
       )
     }
-            )
-      } else {
-          return(
-              <h3 className='center'>Bill failed to update...</h3>
-          )
-        }
-      }
   }
 }
 
